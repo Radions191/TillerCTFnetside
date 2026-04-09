@@ -1,8 +1,5 @@
-
 function HallOfFame() {
-  return (
-    <div>HallOfFame</div>
-  )
+  return <div>HallOfFame</div>;
 }
 
-export default HallOfFame
+export default HallOfFame;
