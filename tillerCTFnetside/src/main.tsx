@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import MainPage from "./MainPage.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
-import HallOfFame from "./HallOfFame.tsx";
 import Navbar from "./components/Navbar.tsx";
+import HallOfFame from "./components/HallOfFame.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
