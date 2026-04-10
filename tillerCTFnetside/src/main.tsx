@@ -4,12 +4,12 @@ import "./index.css";
 import MainPage from "./MainPage.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
 import Navbar from "./components/Navbar.tsx";
-import HallOfFame from "./components/HallOfFame.tsx";
+import HallOfFame from "./HallOfFame.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-    <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/halloffame">
