@@ -1,10 +1,21 @@
-import { players } from "./data/players";
 import type { Players } from "./types/types";
 import PlayerCard from "./components/PlayerCard";
 import { Box, Typography } from "@mui/material";
+import fetchUsers from "./hooks/fetchUsers";
+import { useState, useEffect } from "react";
 
 function HallOfFame() {
-  const sortedPlayers: Players[] = players.sort((a, b) => b.wins - a.wins);
+  const [players, setPlayers] = useState<Players[]>([]);
+  useEffect(() => {
+    async function loadPlayers() {
+      const data = await fetchUsers();
+      setPlayers(data);
+    }
+
+    loadPlayers();
+  }, []);
+
+  const sortedPlayers = players.sort((a, b) => b.wins - a.wins);
   const topPlayers = sortedPlayers.slice(0, 12);
 
   const columns = 3;
@@ -14,11 +25,9 @@ function HallOfFame() {
     sameWin.push(topPlayers[0], topPlayers[1]);
   }
 
-  console.log(sameWin);
-
   if (!players || players.length <= 0) {
     return (
-      <div className="flex justify-center mt-30 p-10 bg-slate-950">
+      <div className="flex justify-center min-h-[calc(100vh-60px)] pt-30 p-10 bg-slate-950">
         <h1 className=" bg-teal-100 p-5 rounded-2xl h-fit border-b-sky-950 border-4 text-2xl font-bold">
           Looks like youre early! The CTF hasn't started yet..
         </h1>
@@ -46,7 +55,12 @@ function HallOfFame() {
         }}
       >
         {topPlayers.map((player, index) => (
-          <PlayerCard key={index} player={player} index={index} sameWin = {sameWin} />
+          <PlayerCard
+            key={index}
+            player={player}
+            index={index}
+            sameWin={sameWin}
+          />
         ))}
       </Box>
 
@@ -62,6 +76,7 @@ function HallOfFame() {
       )}
     </div>
   );
+  return <div>Hei</div>;
 }
 
 export default HallOfFame;
