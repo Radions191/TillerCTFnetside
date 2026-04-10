@@ -9,6 +9,13 @@ function HallOfFame() {
 
   const columns = 3;
 
+  const sameWin: Players[] = [];
+  if (topPlayers.length > 1 && topPlayers[0].wins === topPlayers[1].wins) {
+    sameWin.push(topPlayers[0], topPlayers[1]);
+  }
+
+  console.log(sameWin);
+
   if (!players || players.length <= 0) {
     return (
       <div className="flex justify-center mt-30 p-10 bg-slate-950">
@@ -20,7 +27,7 @@ function HallOfFame() {
   }
 
   return (
-    <div className="flex flex-col w-full h-dvh pt-5 items-center bg-slate-950 text-white" >
+    <div className="flex flex-col w-full min-h-[calc(100vh-60px)] pt-5 items-center bg-slate-950 text-white">
       <h1 className="text-2xl font-extrabold text-center mb-5">
         CTF LEADERBOARD
       </h1>
@@ -39,7 +46,7 @@ function HallOfFame() {
         }}
       >
         {topPlayers.map((player, index) => (
-          <PlayerCard key={index} player={player} index={index} />
+          <PlayerCard key={index} player={player} index={index} sameWin = {sameWin} />
         ))}
       </Box>
 

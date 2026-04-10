@@ -12,7 +12,15 @@ import {
 import defaultpic from "../assets/vite.svg";
 import type { Players } from "../types/types";
 
-function PlayerCard({ player, index }: { player: Players; index: number }) {
+function PlayerCard({
+  player,
+  index,
+  sameWin,
+}: {
+  player: Players;
+  index: number;
+  sameWin: Players[];
+}) {
   //   const pictures: Record<string, string> = {
   //     henrikl,
   //     martinm,
@@ -36,14 +44,22 @@ function PlayerCard({ player, index }: { player: Players; index: number }) {
     },
   });
 
+  const isSharedFirst = sameWin.some((p) => p.name === player.name);
+
   return (
     <ThemeProvider theme={theme}>
       <Card
         sx={{
           display: "flex",
           width: "100%",
-          border: index === 0 ? "2px solid" : "1px solid",
-          borderColor: index === 0 ? "background.paper" : "text.primary",
+          border:
+            isSharedFirst || (index === 0 && sameWin.length === 0)
+              ? "2px solid"
+              : "1px solid",
+          borderColor:
+            isSharedFirst || (index === 0 && sameWin.length === 0)
+              ? "background.paper"
+              : "text.primary",
           bgcolor: "background.default",
           color: "text.primary",
         }}
@@ -56,8 +72,14 @@ function PlayerCard({ player, index }: { player: Players; index: number }) {
             width: { xs: 120, sm: 100, md: 140 },
             height: { xs: 120, sm: 100, md: 140 },
             objectFit: "cover",
-            borderRight: index === 0 ? "2px solid" : "1px solid",
-            borderRightColor: index === 0 ? "background.paper" : "text.primary",
+            borderRight:
+              isSharedFirst || (index === 0 && sameWin.length === 0)
+                ? "2px solid"
+                : "1px solid",
+            borderRightColor:
+              isSharedFirst || (index === 0 && sameWin.length === 0)
+                ? "background.paper"
+                : "text.primary",
           }}
         />
 
@@ -82,7 +104,12 @@ function PlayerCard({ player, index }: { player: Players; index: number }) {
           </Typography>
 
           <Typography variant="body1" sx={{ textAlign: "center" }}>
-            {index === 0 && "👑 "} {player.class} - {player.wins} wins
+            {isSharedFirst
+              ? "👀 "
+              : index === 0 && sameWin.length === 0
+                ? "👑 "
+                : ""}{" "}
+            {player.class} - {player.wins} wins
           </Typography>
         </CardContent>
       </Card>

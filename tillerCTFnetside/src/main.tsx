@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
       <Navbar />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/halloffame">
+        <Route path="/leaderboard">
           <Route index element={<HallOfFame />} />
         </Route>
       </Routes>
