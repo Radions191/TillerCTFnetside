@@ -1,10 +1,10 @@
-import type { Players } from "./types/types";
-import PlayerCard from "./components/PlayerCard";
+import type { Players } from "../types/types";
+import PlayerCard from "../components/PlayerCard";
 import { Box, Typography } from "@mui/material";
-import fetchUsers from "./hooks/fetchUsers";
+import fetchUsers from "../hooks/fetchUsers";
 import { useState, useEffect } from "react";
 
-function HallOfFame() {
+function LeaderBoard() {
   const [players, setPlayers] = useState<Players[]>([]);
   useEffect(() => {
     async function loadPlayers() {
@@ -28,7 +28,7 @@ function HallOfFame() {
   if (!players || players.length <= 0) {
     return (
       <div className="flex justify-center min-h-[calc(100vh-60px)] pt-30 p-10 bg-slate-950">
-        <h1 className=" bg-teal-100 p-5 rounded-2xl h-fit border-b-sky-950 border-4 text-2xl font-bold">
+        <h1 className="bg-white p-5 rounded-2xl h-fit border-b-sky-950 border-4 text-2xl font-bold">
           Looks like youre early! The CTF hasn't started yet..
         </h1>
       </div>
@@ -76,7 +76,6 @@ function HallOfFame() {
       )}
     </div>
   );
-  return <div>Hei</div>;
 }
 
-export default HallOfFame;
+export default LeaderBoard;
