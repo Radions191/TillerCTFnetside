@@ -1,7 +1,6 @@
 export default function MainPage() {
   return (
     <div className="text-white">
-      {/* HERO */}
       <div
         className="relative h-screen bg-cover bg-center"
         style={{
@@ -9,13 +8,12 @@ export default function MainPage() {
           backgroundPositionY: "1px",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/40 to-black"></div>
 
-        <div className="relative flex items-center justify-center h-full text-4xl font-bold"></div>
+        <div className="relative flex items-end  justify-center h-full text-4xl font-bold"></div>
       </div>
 
-      {/* CONTENT */}
-      <div className="bg-black min-h-screen p-10">
+      <div className="bg-black min-h-screen pt-40 px-10 pb-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
           <div id="om-oss" className="text-center">
             <h2 className="text-3xl text-green-700">Hva er CTF?</h2>
