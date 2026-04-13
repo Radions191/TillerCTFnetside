@@ -1,8 +1,56 @@
 export default function MainPage() {
   return (
-    <div className="bg-black min-h-screen text-white">
-      <div className="p-6">
-        <div className="text-2xl font-bold flex justify-center">Tiller CTF</div>
+    <div className="text-white">
+      <div
+        className="relative h-screen bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/backgroundOrig.png')",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
+
+        <div className="relative flex items-center justify-center h-full text-4xl font-bold">
+          Capture the Flag
+        </div>
+      </div>
+
+      <div className="bg-black min-h-screen p-10">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="text-center">
+            <h2 className="text-3xl">Hva er CTF?</h2>
+            <p className="mt-4 opacity-80 text-xl  max-w-md">
+              CTF (Capture the Flag) er en konkurranse innen cybersikkerhet hvor
+              deltakerne løser oppgaver for å finne skjulte "flagg". Oppgavene
+              kan innebære analyse av programmer, nettsider eller systemer.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-3xl">Hvorfor CTF?</h2>
+            <p className="mt-4 opacity-80 text-xl font-Aldrich max-w-md">
+              CTF brukes til læring, konkurranse og rekruttering av talenter.
+              Deltakere utvikler ferdigheter innen problemløsning, programmering
+              og sikkerhet.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-3xl justify-center">Kategorier</h2>
+            <p className="mt-4 opacity-80 text-xl font-Aldrich max-w-md">
+              Vanlige kategorier inkluderer kryptografi, web-sikkerhet,
+              forensics, reverse engineering, OSINT og nettverk.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-3xl">Om TillerCTF</h2>
+            <p className="mt-4 opacity-80 text-xl font-Aldrich max-w-md">
+              TillerCTF arrangeres siden 2023 og har som mål å skape en
+              spennende konkurranse tilpasset elevenes nivå, samt øke interessen
+              for cybersikkerhet på skolen.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
