@@ -1,11 +1,15 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = 3001;
 
 app.use(express.json());
 app.use(cors());
+
+const token = process.env.AUTH_TOKEN;
 
 app.get("/users", async (req, res) => {
   try {
@@ -25,12 +29,12 @@ app.get("/stats", async (req, res) => {
       "https://ctf.tiller.blog/api/v1/statistics/progression/matrix",
       {
         headers: {
-          Authorization:
-            "Token ctfd_19dd4ab414703be8ad36224d282a93dae50e725ee618e0cee5f5348fb41b00ae",
+          Authorization: token || "",
           "Content-Type": "application/json",
         },
       },
     );
+
     const resJson = await response.json();
     res.json(resJson);
   } catch (error) {

@@ -2,32 +2,12 @@ import type { CombinedPlayer, Players } from "../types/types";
 import PlayerCard from "../components/PlayerCard";
 import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import fetchApiData from "../hooks/fetchUsers";
+import loadPlayers from "../hooks/loadPlayers";
 
 function LeaderBoard() {
   const [players, setPlayers] = useState<CombinedPlayer[]>([]);
   useEffect(() => {
-    async function loadPlayers() {
-      const userBasicData = await fetchApiData("users");
-      const userStatsData = await fetchApiData("stats");
-
-      const stats = userStatsData.scoreboard;
-
-      const merged: CombinedPlayer[] = userBasicData.map((user: Players) => {
-        const match = stats.find((stat: any) => stat.id === user.id);
-        return {
-          ...user,
-          attempts: match?.attempts ?? [],
-          solves: match?.solves ?? [],
-          place: match?.place ?? 0,
-          score: match?.score ?? 0,
-        };
-      });
-
-      setPlayers(merged);
-    }
-
-    loadPlayers();
+    loadPlayers(setPlayers);
   }, []);
 
   const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
@@ -47,29 +27,34 @@ function LeaderBoard() {
   const mostChaotic = players
     .slice()
     .sort((a, b) => (b.attempts?.length || 0) - (a.attempts?.length || 0))[0];
-  console.log(mostChaotic);
 
   return (
-    <div className="relative min-h-[calc(100vh-60px)] w-full flex flex-col items-center py-8 bg-[url('/hallOfFameBG.png')] bg-cover text-white">
+    <div className="relative min-h-[calc(100vh-60px)] w-full flex flex-col items-center py-8 bg-[url('/hallOfFameBG.png')] bg-cover">
       <div className="absolute inset-0 bg-black/70 pointer-events-none" />
       <div className="relative flex flex-col z-10 items-center w-full">
         {!players ||
           (players.length <= 0 ? (
-            <h1 className="bg-white p-5 rounded-2xl h-fit border-b-sky-950 border-4 text-2xl font-bold">
+            <h1 className="p-5 rounded-2xl h-fit border-b-sky-950 border-4 text-2xl text-[#54F28D] font-bold">
               Looks like youre early! The CTF hasn't started yet..
             </h1>
           ) : (
-            <h1 className="text-2xl font-extrabold text-center text-white">
-              CTF LEADERBOARD
-            </h1>
+            <>
+              <h1 className="text-2xl font-light text-center text-white">
+                CTF LEADERBOARD
+              </h1>
+              {mostChaotic.attempts.length > 0 && (
+                <Typography
+                  sx={{ marginBottom: 4, color: "white", textAlign: "center" }}
+                >
+                  Totale fails: ❌ {totalFails} <br />
+                  Bruteforce-kongen: 💀 {
+                    mostChaotic.name.split(" ")[0]
+                  } med {mostChaotic.attempts.length} fails
+                </Typography>
+              )}
+            </>
           ))}
 
-        <Typography>Totale fails: ❌ {totalFails}</Typography>
-        {mostChaotic && (
-          <Typography sx={{ marginBottom: 4 }}>
-            Bruteforce-kongen: 💀 {mostChaotic.name.split(" ")[0]} med {mostChaotic.attempts.length} fails
-          </Typography>
-        )}
         <Box
           sx={{
             display: "grid",
