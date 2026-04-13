@@ -7,7 +7,6 @@ export interface Players {
   ];
   id: number;
   name: string;
-  wins: number;
   avatar?: string;
 }
 
@@ -16,4 +15,11 @@ export interface HallOfFamers {
   yearOfVictory: number;
   classWhenWon: string;
   avatar?: string;
+}
+
+export interface CombinedPlayer extends Players {
+  attempts: number[];
+  solves: number[];
+  place: number;
+  score: number;
 }

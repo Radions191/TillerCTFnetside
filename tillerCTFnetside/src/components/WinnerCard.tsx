@@ -17,11 +17,13 @@ function WinnerCard({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: 370,
-        height: 300,
-        border: "1px solid",
+        width: { xs: "100%", sm: 350, lg: 400 },
+        border: "2px solid",
+        borderColor: "#4D5A6A",
         borderRadius: 3,
-        bgcolor: "#C3FFD1",
+        bgcolor: "#020618",
+        color: "#54F28D",
+        overflow: "hidden",
       }}
     >
       <CardMedia
@@ -30,10 +32,7 @@ function WinnerCard({
         alt={`Profile picture of ${name}`}
         sx={{
           width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          padding: 1,
-          borderRadius: 3,
+          height: 200,
         }}
       />
 
@@ -45,16 +44,9 @@ function WinnerCard({
           textAlign: "center",
         }}
       >
-        <Typography
-          sx={{
-            fontWeight: "bold",
-            fontSize: "1.3rem",
-          }}
-        >
-          {name}
-        </Typography>
+        <h1 className="font-medium text-2xl">{name}</h1>
 
-        <Typography sx={{ fontSize: "0.9rem", fontWeight:600 }}>
+        <Typography sx={{ fontWeight: "bold" }}>
           {classAttend} 👑 {year}
         </Typography>
       </CardContent>

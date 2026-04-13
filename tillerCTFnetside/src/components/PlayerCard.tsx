@@ -1,121 +1,97 @@
-import {
-  Card,
-  Typography,
-  CardMedia,
-  CardContent,
-  createTheme,
-  ThemeProvider,
-} from "@mui/material";
-// import henrikl from "../assets/hero.png";
-// import eivindb from "../assets/react.svg";
-// import martinm from "../assets/vite.svg";
+import { Card, Typography, CardMedia, CardContent } from "@mui/material";
 import defaultpic from "../assets/vite.svg";
-import type { Players } from "../types/types";
+import type { CombinedPlayer, Players } from "../types/types";
 
 function PlayerCard({
   player,
   index,
   sameWin,
 }: {
-  player: Players;
+  player: CombinedPlayer;
   index: number;
   sameWin: Players[];
 }) {
-  
-  //   const pictures: Record<string, string> = {
-  //     henrikl,
-  //     martinm,
-  //     eivindb,
-  //   };
+  const pictures: Record<string, string> = {};
 
-  //   const key =
-  //     player.name.split(" ")[0].toLowerCase() +
-  //     player.name.split(" ")[1][0].toLowerCase();
-
-  const theme = createTheme({
-    palette: {
-      background: {
-        default: "#020618",
-        paper: "#ffd700",
-      },
-      text: {
-        primary: "#f5f5f5",
-        secondary: "#46505A",
-      },
-    },
-  });
+  const key =
+    // player.name.split(" ")[0].toLowerCase() +
+    // player.name.split(" ")[1][0].toLowerCase() ||
+    player.name;
 
   const isSharedFirst = sameWin.some((p) => p.name === player.name);
   const classAttended = player.fields[0].value;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Card
+    <Card
+      sx={{
+        display: "flex",
+        width: "100%",
+        border:
+          isSharedFirst || (player.place === 1 && sameWin.length === 0)
+            ? "2px solid"
+            : "1px solid",
+        borderColor:
+          isSharedFirst || (player.place === 1 && sameWin.length === 0)
+            ? "#C3FFD1"
+            : "#062249",
+        bgcolor: "#020618",
+        color: "#54F28D",
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={pictures[key] ?? defaultpic}
+        alt={`Profile picture of ${player.name}`}
         sx={{
-          display: "flex",
-          width: "100%",
-          border:
+          width: 120,
+          height: 120,
+          objectFit: "cover",
+          flexShrink: 0,
+          borderRight:
             isSharedFirst || (index === 0 && sameWin.length === 0)
               ? "2px solid"
               : "1px solid",
-          borderColor:
+          borderRightColor:
             isSharedFirst || (index === 0 && sameWin.length === 0)
-              ? "background.paper"
-              : "text.primary",
-          bgcolor: "background.default",
-          color: "text.primary",
+              ? "#C3FFD1"
+              : "#062249",
+        }}
+      />
+
+      <CardContent
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          px: 2,
+          py: 1,
+          gap: 0.5,
         }}
       >
-        <CardMedia
-          component="img"
-          image={/*pictures[key] ??*/ defaultpic}
-          alt={`Profile picture of ${player.name}`}
-          sx={{
-            width: { xs: 120, sm: 100, md: 140 },
-            height: { xs: 120, sm: 100, md: 140 },
-            objectFit: "cover",
-            borderRight:
-              isSharedFirst || (index === 0 && sameWin.length === 0)
-                ? "2px solid"
-                : "1px solid",
-            borderRightColor:
-              isSharedFirst || (index === 0 && sameWin.length === 0)
-                ? "background.paper"
-                : "text.primary",
-          }}
-        />
+        <h2 className="font-normal, text-center text-lg text">
+          #{player.place || index + 1} {player.name}
+        </h2>
 
-        <CardContent
-          sx={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <Typography
+          sx={{ fontSize: "0.9rem", opacity: 0.8, textAlign: "center" }}
         >
-          <Typography
-            variant="subtitle1"
-            sx={{
-              fontWeight: "bold",
-              fontSize: { xs: "0.9rem", sm: "1rem", lg: "1.2rem" },
-              textAlign: "center",
-            }}
+          {isSharedFirst
+            ? "👀 "
+            : player.place === 1 && sameWin.length === 0
+              ? "👑 "
+              : ""}{" "}
+          {player.score} - {classAttended}
+        </Typography>
+        {/* <div className="flex items-center justify-around text-sm mt-1">
+          <span
+            className={`opacity-70 ${player.attempts.length > 50 ? "text-red-400" : ""}`}
           >
-            #{index + 1} {player.name}
-          </Typography>
-
-          <Typography variant="body1" sx={{ textAlign: "center" }}>
-            {isSharedFirst
-              ? "👀 "
-              : index === 0 && sameWin.length === 0
-                ? "👑 "
-                : ""}{" "}
-            {classAttended} - {player.wins} wins
-          </Typography>
-        </CardContent>
-      </Card>
-    </ThemeProvider>
+            ❌ {player.attempts.length} | ✅ {player.solves.length}
+          </span>
+        </div> */}
+      </CardContent>
+    </Card>
   );
 }
 
