@@ -51,8 +51,8 @@ function PlayerCard({
             isSharedFirst || (index === 0 && sameWin.length === 0)
               ? "2px solid"
               : "1px solid",
-          borderRightColor:
-            isSharedFirst || (index === 0 && sameWin.length === 0)
+          borderColor:
+            isSharedFirst || (player.place === 1 && sameWin.length === 0)
               ? "#C3FFD1"
               : "#062249",
         }}
