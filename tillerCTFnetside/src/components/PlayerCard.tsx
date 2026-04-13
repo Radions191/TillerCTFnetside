@@ -21,6 +21,7 @@ function PlayerCard({
   index: number;
   sameWin: Players[];
 }) {
+  
   //   const pictures: Record<string, string> = {
   //     henrikl,
   //     martinm,
@@ -45,6 +46,7 @@ function PlayerCard({
   });
 
   const isSharedFirst = sameWin.some((p) => p.name === player.name);
+  const classAttended = player.fields[0].value;
 
   return (
     <ThemeProvider theme={theme}>
@@ -109,7 +111,7 @@ function PlayerCard({
               : index === 0 && sameWin.length === 0
                 ? "👑 "
                 : ""}{" "}
-            {player.class} - {player.wins} wins
+            {classAttended} - {player.wins} wins
           </Typography>
         </CardContent>
       </Card>
