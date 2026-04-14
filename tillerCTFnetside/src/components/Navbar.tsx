@@ -1,9 +1,16 @@
-import { Link, Outlet, NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
+import { Outlet } from "react-router";
 
 export default function Navbar() {
+  const location = useLocation();
+
+  if (location.pathname === "/top3") {
+    return <Outlet />;
+  }
+
   return (
     <>
-      <div className="bg-black ">
+      <div className="bg-black">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-8">
           <NavLink
             to="/"
