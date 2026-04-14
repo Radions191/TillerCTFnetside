@@ -1,8 +1,9 @@
-import type { CombinedPlayer, Players } from "../types/types";
+import type { CombinedPlayer } from "../types/types";
 import PlayerCard from "../components/PlayerCard";
 import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import loadPlayers from "../hooks/loadPlayers";
+import calculateSameWin from "../utils/calculateSameWin";
 
 function LeaderBoard() {
   const [players, setPlayers] = useState<CombinedPlayer[]>([]);
@@ -10,16 +11,12 @@ function LeaderBoard() {
     loadPlayers(setPlayers);
   }, []);
 
-  const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
-  const topPlayers = sortedPlayers.slice(0, 12);
+  const topPlayers = [...players]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 12);
 
   const columns = 3;
-
-  const sameWin: Players[] = [];
-  if (topPlayers.length > 1 && topPlayers[0].score === topPlayers[1].score) {
-    sameWin.push(topPlayers[0], topPlayers[1]);
-  }
-
+  const sameWin = calculateSameWin(topPlayers);
   const totalFails = players.reduce((sum, player) => {
     return sum + (player.attempts?.length || 0);
   }, 0);
@@ -39,7 +36,7 @@ function LeaderBoard() {
             </h1>
           ) : (
             <>
-              <h1 className="text-2xl font-light text-center text-white">
+              <h1 className="text-2xl mb-5 font-light text-center text-white">
                 CTF LEADERBOARD
               </h1>
               {mostChaotic.attempts.length > 0 && (
@@ -74,6 +71,7 @@ function LeaderBoard() {
               player={player}
               index={index}
               sameWin={sameWin}
+              top3OrNormal="normal"
             />
           ))}
         </Box>
