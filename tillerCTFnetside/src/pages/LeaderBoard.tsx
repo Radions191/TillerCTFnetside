@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import loadPlayers from "../hooks/loadPlayers";
 import calculateSameWin from "../utils/calculateSameWin";
+import getKey from "../utils/getKey";
 
 function LeaderBoard() {
   const [players, setPlayers] = useState<CombinedPlayer[]>([]);
@@ -20,6 +21,8 @@ function LeaderBoard() {
   const totalFails = players.reduce((sum, player) => {
     return sum + (player.attempts?.length || 0);
   }, 0);
+
+  const avatarkeys = getKey(topPlayers);
 
   const mostChaotic = players
     .slice()
