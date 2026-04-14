@@ -29,7 +29,7 @@ function PlayerCard({
     <Card
       sx={{
         display: "flex",
-        width: isTop3 ? "70%" : "100%",
+        width: isTop3 ? "80%" : "100%",
         maxWidth: isTop3 ? "300px" : "none",
         border: isSharedFirst || player.place === 1 ? "2px solid" : "1px solid",
         borderColor:
@@ -68,12 +68,12 @@ function PlayerCard({
         }}
       >
         <h2
-          className={`font-normal, text-center  ${isTop3 ? "text-2xl" : "text-lg"}`}
+          className={`font-normal, text-center  ${isTop3 ? "text-3xl" : "text-lg"}`}
         >
           #{player.place || index + 1} {player.name}
         </h2>
 
-        <Typography sx={{ fontSize: "0.9rem", textAlign: "center" }}>
+        <Typography sx={{ fontSize: "1.4rem", textAlign: "center" }}>
           {isSharedFirst
             ? "👀 "
             : player.place === 1 && sameWin.length === 0
