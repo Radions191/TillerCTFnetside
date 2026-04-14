@@ -13,47 +13,37 @@ function TopThree() {
 
   const topPlayers = [...players].sort((a, b) => b.score - a.score).slice(0, 3);
   const sameWin = calculateSameWin(topPlayers);
-  const [first, ...rest] = topPlayers;
 
   return (
     <div className="relative min-h-[calc(100vh-60px)] w-full overflow-hidden">
       <video
         className="absolute top-0 left-0 min-h-full min-w-full object-cover z-0"
-        src={"/placeholder.mp4"}
+        src={"/CTFBG.mp4"}
         autoPlay
         loop
         muted
       />
-      <div className="relative z-10 flex flex-col min-h-[calc(100vh-60px)] pt-20 items-center justify-start bg-black/60">
-        <h1 className="text-2xl font-light my-10 text-white">
+      <div className="relative z-10 flex flex-col min-h-[calc(100vh-60px)] pt-9 items-center justify-start bg-black/60">
+        <h1 className="text-5xl font-light my-10 text-white bg-black p-5">
           Top 3 Leaderboard
         </h1>
-        <div className="flex justify-center mb-10 sm:w-1/2 md:w-1/3">
-          {first && (
-            <PlayerCard
-              player={first}
-              index={first.place ?? 1}
-              sameWin={sameWin}
-              top3OrNormal="top3"
-            />
-          )}
-        </div>
+
         <Stack
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row" },
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: 4,
+            gap: 5,
             width: "100%",
             paddingX: { xs: 5, md: 10 },
           }}
         >
-          {rest.map((player, index) => (
+          {topPlayers.map((player, index) => (
             <PlayerCard
               key={player.name || index}
               player={player}
-              index={player.place || index + 1}
+              index={index}
               sameWin={sameWin}
               top3OrNormal="top3"
             />
