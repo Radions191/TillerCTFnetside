@@ -15,7 +15,7 @@ function TopThree() {
   const sameWin = calculateSameWin(topPlayers);
 
   return (
-    <div className="relative min-h-[calc(100vh-60px)] w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden">
       <video
         className="absolute top-0 left-0 min-h-full min-w-full object-cover z-0"
         src={"/CTFBG.mp4"}
@@ -23,7 +23,7 @@ function TopThree() {
         loop
         muted
       />
-      <div className="relative z-10 flex flex-col min-h-[calc(100vh-60px)] pt-9 items-center justify-start bg-black/60">
+      <div className="relative z-10 flex flex-col h-screen pt-11 items-center justify-start bg-black/60">
         <h1 className="text-5xl font-light my-10 text-white bg-black p-5">
           Top 3 Leaderboard
         </h1>
@@ -34,7 +34,7 @@ function TopThree() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: 5,
+            gap: 7,
             width: "100%",
             paddingX: { xs: 5, md: 10 },
           }}

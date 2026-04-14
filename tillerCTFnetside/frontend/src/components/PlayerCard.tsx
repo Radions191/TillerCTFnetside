@@ -73,7 +73,7 @@ function PlayerCard({
           #{player.place || index + 1} {player.name}
         </h2>
 
-        <Typography sx={{ fontSize: "1.4rem", textAlign: "center" }}>
+        <Typography sx={{ fontSize: "1.2rem", textAlign: "center" }}>
           {isSharedFirst
             ? "👀 "
             : player.place === 1 && sameWin.length === 0
