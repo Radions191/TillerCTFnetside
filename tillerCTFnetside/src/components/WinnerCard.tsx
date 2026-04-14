@@ -3,11 +3,13 @@ import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 function WinnerCard({
   name,
   classAttend,
+  place,
   year,
   image,
 }: {
   name: string;
   classAttend: string;
+  place: string;
   year: number;
   image: string;
 }) {
@@ -44,7 +46,9 @@ function WinnerCard({
           textAlign: "center",
         }}
       >
-        <h1 className="font-medium text-2xl">{name}</h1>
+        <h1 className="font-medium text-2xl">
+          {place} {name}
+        </h1>
 
         <Typography sx={{ fontWeight: "bold" }}>
           {classAttend} 👑 {year}

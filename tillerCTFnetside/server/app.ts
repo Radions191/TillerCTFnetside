@@ -15,8 +15,7 @@ app.get("/users", async (req, res) => {
   try {
     const response = await fetch("https://ctf.tiller.blog/api/v1/users");
 
-    const resJson = await response.json();
-    res.json(resJson);
+    res.json(await response.json());
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch users" });
@@ -35,8 +34,7 @@ app.get("/stats", async (req, res) => {
       },
     );
 
-    const resJson = await response.json();
-    res.json(resJson);
+    res.json(await response.json());
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch stats" });
