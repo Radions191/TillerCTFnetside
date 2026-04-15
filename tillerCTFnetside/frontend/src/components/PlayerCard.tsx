@@ -1,6 +1,6 @@
 import { Card, Typography, CardMedia, CardContent } from "@mui/material";
-import defaultpic from "../assets/vite.svg";
 import type { CombinedPlayer } from "../types/types";
+import getKey from "../utils/getKey";
 
 function PlayerCard({
   player,
@@ -13,17 +13,14 @@ function PlayerCard({
   sameWin: CombinedPlayer[];
   top3OrNormal: "top3" | "normal";
 }) {
-  const pictures: Record<string, string> = {};
-
-  const key =
-    // player.name.split(" ")[0].toLowerCase() +
-    // player.name.split(" ")[1][0].toLowerCase() ||
-    player.name;
-
   const isSharedFirst = sameWin.some((p) => p.name === player.name);
   const classAttended = player.fields[0].value;
 
   const isTop3 = top3OrNormal === "top3";
+
+  const key = getKey(player) || "vite.svg";
+  const avatar = `https://ctf-backend-worker.noahdiakowski.workers.dev/api/avatar/${key}`;
+  const defaultpic = "/favicon.svg";
 
   return (
     <Card
@@ -41,7 +38,10 @@ function PlayerCard({
       {!isTop3 && (
         <CardMedia
           component="img"
-          image={pictures[key] ?? defaultpic}
+          image={avatar}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = defaultpic;
+          }}
           alt={`Profile picture of ${player.name}`}
           sx={{
             width: 120,

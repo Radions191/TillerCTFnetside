@@ -22,8 +22,6 @@ function LeaderBoard() {
     return sum + (player.attempts?.length || 0);
   }, 0);
 
-  const avatarkeys = getKey(topPlayers);
-
   const mostChaotic = players
     .slice()
     .sort((a, b) => (b.attempts?.length || 0) - (a.attempts?.length || 0))[0];
