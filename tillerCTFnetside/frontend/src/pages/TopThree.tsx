@@ -7,11 +7,30 @@ import calculateSameWin from "../utils/calculateSameWin";
 
 function TopThree() {
   const [players, setPlayers] = useState<CombinedPlayer[]>([]);
+
   useEffect(() => {
-    loadPlayers(setPlayers);
+    let isMounted = true;
+
+    const fetchData = async () => {
+      await loadPlayers((data) => {
+        if (isMounted) setPlayers(data);
+      });
+    };
+
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 45000);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   const topPlayers = [...players].sort((a, b) => b.score - a.score).slice(0, 3);
+
   const sameWin = calculateSameWin(topPlayers);
 
   return (
@@ -23,6 +42,7 @@ function TopThree() {
         loop
         muted
       />
+
       <div className="relative z-10 flex flex-col h-screen pt-11 items-center justify-start bg-black/60">
         <h1 className="text-5xl font-light my-10 text-white bg-black p-5">
           Top 3 Leaderboard
