@@ -47,7 +47,7 @@ function WinnerCard({
         }}
       >
         <h1 className="font-medium text-2xl">
-          {place} {name}
+          {place || ""} {name}
         </h1>
 
         <Typography sx={{ fontWeight: "bold" }}>

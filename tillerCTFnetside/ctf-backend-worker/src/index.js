@@ -43,6 +43,23 @@ export default {
 			}
 		}
 
+		if (url.pathname.startsWith('/api/avatar/')) {
+			const key = url.pathname.split('/api/avatar/')[1];
+
+			const file = await env.ASSETS.fetch(`https://internal/avatars/${key}.png`);
+
+			if (!file.ok) {
+				return new Response('Not found', { status: 404 });
+			}
+
+			return new Response(file.body, {
+				headers: {
+					'Content-Type': 'image/png',
+					'Access-Control-Allow-Origin': '*',
+				},
+			});
+		}
+
 		if (url.pathname === '/') {
 			return new Response('CTFd API Worker is running');
 		}

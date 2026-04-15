@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
-import ProfileCard from "../components/WinnerCard";
-import defaultPic from "../assets/vite.svg";
+import WinnerCard from "../components/WinnerCard";
 import adrianPic from "../assets/adrian.png";
 import finnPic from "../assets/finn.png";
 
 function HallOfFame() {
+  const defaultPic = "/favicon.svg";
   return (
     <div className="relative min-h-[calc(100vh-60px)] w-full flex flex-col items-center py-8 bg-[url('/hallOfFameBG.png')] bg-cover">
       <div className="absolute inset-0 bg-black/70 pointer-events-none" />
@@ -14,9 +14,10 @@ function HallOfFame() {
         </h1>
 
         <div className="flex justify-center mb-10 sm:w-1/2 md:w-1/3">
-          <ProfileCard
+          <WinnerCard
             name="???"
             classAttend="Sikkert Tiller"
+            place=""
             year={2026}
             image={defaultPic}
           />
@@ -34,21 +35,24 @@ function HallOfFame() {
             paddingX: { xs: 5, md: 10 },
           }}
         >
-          <ProfileCard
+          <WinnerCard
             name="Finn Galloway McCann"
             classAttend="CHA IT"
+            place=""
             year={2025}
             image={finnPic}
           />
-          <ProfileCard
+          <WinnerCard
             name="Adrian Risvik"
             classAttend="2IT"
+            place=""
             year={2024}
             image={adrianPic}
           />
-          <ProfileCard
+          <WinnerCard
             name="Sigurd Strand Osen"
             classAttend="1ID"
+            place=""
             year={2023}
             image={defaultPic}
           />
