@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import loadPlayers from "../hooks/loadPlayers";
 import calculateSameWin from "../utils/calculateSameWin";
-import getKey from "../utils/getKey";
+
 
 function LeaderBoard() {
   const [players, setPlayers] = useState<CombinedPlayer[]>([]);
