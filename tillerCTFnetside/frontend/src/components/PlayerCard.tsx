@@ -1,6 +1,7 @@
 import { Card, Typography, CardMedia, CardContent } from "@mui/material";
 import type { CombinedPlayer } from "../types/types";
 import getKey from "../utils/getKey";
+import { useEffect, useState } from "react";
 
 function PlayerCard({
   player,
@@ -13,6 +14,16 @@ function PlayerCard({
   sameWin: CombinedPlayer[];
   top3OrNormal: "top3" | "normal";
 }) {
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTick((t) => t + 1);
+    }, 45000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const isSharedFirst = sameWin.some((p) => p.name === player.name);
   const classAttended = player.fields[0].value;
 
@@ -68,7 +79,9 @@ function PlayerCard({
         }}
       >
         <h2
-          className={`font-normal, text-center  ${isTop3 ? "text-4xl" : "text-lg"}`}
+          className={`font-normal, text-center ${
+            isTop3 ? "text-4xl" : "text-lg"
+          }`}
         >
           #{player.place || index + 1} {player.name}
         </h2>
