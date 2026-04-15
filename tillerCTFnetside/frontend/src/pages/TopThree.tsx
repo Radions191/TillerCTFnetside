@@ -34,7 +34,7 @@ function TopThree() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: 7,
+            gap: 4,
             width: "100%",
             paddingX: { xs: 5, md: 10 },
           }}

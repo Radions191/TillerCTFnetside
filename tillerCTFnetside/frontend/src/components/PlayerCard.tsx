@@ -68,12 +68,14 @@ function PlayerCard({
         }}
       >
         <h2
-          className={`font-normal, text-center  ${isTop3 ? "text-3xl" : "text-lg"}`}
+          className={`font-normal, text-center  ${isTop3 ? "text-4xl" : "text-lg"}`}
         >
           #{player.place || index + 1} {player.name}
         </h2>
 
-        <Typography sx={{ fontSize: "1.2rem", textAlign: "center" }}>
+        <Typography
+          sx={{ fontSize: isTop3 ? "1.8rem" : "1.2rem", textAlign: "center" }}
+        >
           {isSharedFirst
             ? "👀 "
             : player.place === 1 && sameWin.length === 0
@@ -83,7 +85,7 @@ function PlayerCard({
         </Typography>
 
         {isTop3 && (
-          <div className="flex items-center justify-around text-sm mt-1">
+          <div className="flex items-center justify-around text-lg mt-1">
             <span
               className={`${player.attempts.length > 50 ? "text-red-400" : ""}`}
             >
